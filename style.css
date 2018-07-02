@@ -17,3 +17,15 @@
       position: fixed;
       bottom: 0;
   }
+  .player_input {
+    width: 25%;
+    height: 48px;
+    border: solid 1px orange;
+  }
+  .submit {
+    background-color: green;
+    width: 25%;
+  }
+  .guess {
+      
+  }

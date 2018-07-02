@@ -4,38 +4,38 @@
     <title>Guessing Game</title>
 
     <!-- Bootstrap and CSS here-->
-    <link rel="stylesheet" type="test/css" href="style.css"></link>
+    <link rel='stylesheet' type='test/css' href='style.css'></link>
 
   </head>
   <body>
 
       <div id='app'>
 
-        <div id='headers'>
+        <div id='headers' class='center'>
           <!-- Title and subtitles! -->
           <h1>Guessing Game!</h1>
           <h3>Guess a number between 1-100</h3>
         </div>
 
         <div id='main'>
-          <div id='input-parent'>
+          <div id='input-parent' class='center'>
             <!-- Player's guess input, and submit button -->
-            <input placeholder="###" maxlength='3' autofocus=autofocus>Enter Your Guess Here</input>
-            <button>Guess!</button>
+            <input id='player-input' class ='center' placeholder="###" maxlength='3' autofocus=autofocus>Enter Your Guess Here</input>
+            <button id='submit'>Guess!</button>
           </div>
 
           <div id='guesses'>
             <!-- unordered list of guesses -->
             <ul>
-                <li>-</li>
-                <li>-</li>
-                <li>-</li>
-                <li>-</li>
-                <li>-</li>
+                <li class='guess'>-</li>
+                <li class='guess'>-</li>
+                <li class='guess'>-</li>
+                <li class='guess'>-</li>
+                <li class='guess'>-</li>
             </ul>
           </div>
 
-          <div id="menu-btns">
+          <div id='menu-btns' class='center'>
             <!-- reset and hint buttons -->
             <button>Need a Hint?</button>
             <button>RESET</button>
