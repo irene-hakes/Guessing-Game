@@ -21,23 +21,42 @@ img {
     bottom: 0;
 }
 #players-input {
-    width: 100%;
-    height: 48px;
-    border: solid 1px orange;
+    width: 160px;
+    height: 160px;
+    border: dotted 2px silver;
+    border-radius: 50%;
     margin-top: 25px;
+    font-size: 60px;
 }
 #submit {
-    width: 75%;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
     margin: 25px;
 }
+
 .guess {
-    height: 24px;
+    display: inline;
+    font-size: 60px;
+    border: solid 0.5px silver;
+    padding: 0 25px;
+    border-radius: 10%;
+    margin: 10px;
 }
 #input-parent {
+    position: relative;
     width: 160px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 5% auto 50px;
 }
 #guesses {
     margin: 25px;
+}
+#hint {
+    margin-top: 30px;
+}
+#reset {
+    margin-top: 30px;
 }
