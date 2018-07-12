@@ -39,21 +39,29 @@ Game.prototype.playersGuessSubmission = function(guess) {
 
 Game.prototype.checkGuess = function() {
     if(this.winningNumber === this.playersGuess) {
-        return 'You Win!';
+        $('#hint, #submit').prop("disabled",true);
+        $('#subtitle').text("Press the Reset button to play again!")
+        return 'We have a winner!';
     }
     
     if(this.pastGuesses.indexOf(this.playersGuess) > -1) {
-        return 'You have already guessed that number.';
+        return 'Hey, you have already guessed that number, silly!';
     }
     
     this.pastGuesses.push(this.playersGuess);
-    
+    $('#guess-list li:nth-child(' + this.pastGuesses.length +')').text(this.playersGuess);
     if(this.pastGuesses.length === 5) {
-        return 'You Lose.';
+        $('#hint, #submit').prop("ddisabled",true);
+        $('#subtitle').text("Press the Reset button to play again!");
+        return 'You Lose :(';
     }
 
     let diff = this.difference();
-
+    if(this.isLower()) {
+        $('#subtitle').text("Guess Higher!");
+    }else {
+        $('#subtitle').text("Guess Lower!");
+    }
     if(diff < 10) {
         return `You're burning up!`;
     }
@@ -70,7 +78,13 @@ Game.prototype.checkGuess = function() {
  }
 
 Game.prototype.provideHint = function() {
-    let hintArray = [this.winningNumber, generateWinningNumber(), generateWinningNumber()];
+    let hintArray = [this.winningNumber];
+    while(hintArray.length < 3) {
+        let hint = generateWinningNumber();
+        if(hint !== this.winningNumber && this.pastGuesses.indexOf(hint) === -1) {
+            hintArray.push(hint);
+        }
+    }
     return shuffle(hintArray);
 }
 
@@ -78,31 +92,56 @@ function newGame() {
     return new Game();
 }
 
-// function makeAGuess(game) {
-//     var guess = $('#player-input').val();
-//     $('player-input').val("");
-//     var output = game.playersGuessSubmission(parseInt(guess, 10));
-//     console.log(output);
-// }
-
 function makeAGuess(game) {
     var guess = +$('#players-input').val();
     var result = game.playersGuessSubmission(guess);
-    console.log(result);
+    // $('.title').addClass('duringGame');
+    if(result === `You're a bit chilly.` || result === `You're ice cold!`) {
+        $('.title').addClass('duringGame-cold');
+        $('.title, .duringGame-cold').text(result);
+    }else if(result === `You're burning up!` || result === `You're lukewarm.`) {
+        $('.title').addClass('duringGame-hot');
+        $('.title, .duringGame-hot').text(result);
+    }else {
+        $('.title, .duringGame-hot').removeClass('duringGame-hot');
+        $('.title, .duringGame-cold').removeClass('duringGame-cold');
+        if(result = 'We have a winner!') {
+            $('.title').addClass('winner');
+            $('.title, .winner').text(result);
+            $('#input-parent, #guesses').hide();
+        }else {
+            $('.title').text(result);
+        }
+    }
+
 }
 
 $(document).ready( function() {
     var game = new Game();
     $('#submit').click(function(e) {
-        console.log('The Submit Button was clicked!');
         makeAGuess(game);
-        $('#player-input').val("");
+        $('#players-input').val("");
     })
-    $('#player-input').keypress(function(event) {
+    $('#players-input').keypress(function(event) {
         if( event.which == 13 ) {
             console.log('You hit enter!');
             makeAGuess(game);
-            $('#player-input').val("");
+            $('#players-input').val("");
         }
+    })
+    $('#hint').click(function() {
+        var hints = game.provideHint();
+        $('#subtitle').text(`One of these is the winning number: ${hints[0]}, ${hints[1]} or ${hints[2]}!`);
+    })
+    $('#reset').click(function() {
+        game = new Game();
+        $('.title').text('Play the Guessing Game!');
+        $('.title, .duringGame-hot').removeClass('duringGame-hot');
+        $('.title, .duringGame-cold').removeClass('duringGame-cold');
+        $('.title, .winner').removeClass('winner');
+        $('#subtitle').text('Guess a number between 1-100!');
+        $('.guess').text('-');
+        $('#hint, #submit').prop("disabled", false);
+        $('#input-parent, #guesses').show();
     })
 })

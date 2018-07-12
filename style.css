@@ -2,7 +2,7 @@ html {
     box-sizing: 'border-box';
 }
 body {
-    background-color: silver;
+    background-color: rgb(218, 218, 218);
 }
 .center {
     text-align: center;
@@ -13,15 +13,41 @@ ul {
 }
 img {
     display: inline;
-    width: 200px;
-    height: 100px;
+    height: 50px;
+}
+.title {
+    font-family: 'Abril Fatface', serif;
+    font-size: 80px;
+}
+.duringGame{
+    font-family: 'Avenir';
+    font-size: 80px;
+}
+.duringGame-cold{
+    color: #5bc0de;
+    font-family: 'Avenir';
+    font-size: 80px;
+    font-weight: bold;
+}
+.duringGame-hot {
+    color: #c9302c;
+    font-family: 'Avenir';
+    font-size: 80px;
+    font-weight: bold;
+}
+.winner {
+    font-size: 240px;
+}
+#subtitle{
+    font-family: 'Avenir';
 }
 #footer {
     width: 100%;
-    border-top: solid 2px black;
+    border-top: dotted 2px black;
     background-color: white;
     position: fixed;
     bottom: 0;
+    font-family: 'Avenir';
 }
 #players-input {
     width: 320px;
